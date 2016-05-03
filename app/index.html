@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" >
+  	<head>
+		<title>tillr Value Calculator</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+		<style type="text/css">
+			/**
+				* Hide when Angular is not yet loaded and initialized
+				*/
+			[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body ng-app="vc" ng-cloak>
+	
+		<value-calculator></value-calculator>
+	
+		<script src="../node_modules/angular/angular.js"></script>
+		<script src="../node_modules/angular-animate/angular-animate.js"></script>
+		<script src="../node_modules/angular-aria/angular-aria.js"></script>
+		<script src="assets/ngcurrency.js"></script>
+		<script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
+
+		<script type="text/ng-template" id="calculator.html">
+			<ng-form name="calculator">
+				<h1>ROI Funnel</h1>
+				<!-- Number of inspections per week -->
+				<md-input-container>
+					<label>Number of inspections per week</label>
+					<input name="inspections" ng-model="calc.inspections" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Number of inspections per week -->
+				<!-- Number of hours spent on follow up tasks per week (in hours) -->
+				<md-input-container>
+					<label>Number of hours spent on follow up tasks per week (in hours)</label>
+					<input name="hours" ng-model="calc.hours" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Number of hours spent on follow up tasks per week (in hours) -->
+				<!-- Average time spent on follow up tasks per week (in hours) -->
+				<md-input-container>
+					<label>Average time spent on follow up tasks per week (in hours)</label>
+					<input name="time" ng-model="calc.time" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Average time spent on follow up tasks per week (in hours) -->
+				<!-- Average salary of the person carrying out the inspections -->
+				<md-input-container>
+					<label>Average salary of the person carrying out the inspections</label>
+					<input name="salary" ng-model="calc.salary" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Average salary of the person carrying out the inspections -->
+				<!-- Average weekly rate of the person carrying out the inspections -->
+				<md-input-container>
+					<label>Average weekly rate of the person carrying out the inspections</label>
+					<input name="weeklyrate" ng-model="calc.weeklyrate" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Average weekly rate of the person carrying out the inspections -->
+				<!-- Average hourly rate of the person carrying out the inspections -->
+				<md-input-container>
+					<label>Average hourly rate of the person carrying out the inspections</label>
+					<input name="hourlyrate" ng-model="calc.hourlyrate" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Average hourly rate of the person carrying out the inspections -->
+				<!-- Cost of follow up tasks per week  -->
+				<md-input-container>
+					<label>Cost of follow up tasks per week</label>
+					<input name="weeklycost" ng-model="calc.weeklycost" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Cost of follow up tasks per week  -->
+				<!-- Cost of follow up tasks per year  -->
+				<md-input-container>
+					<label>Cost of follow up tasks per year</label>
+					<input name="yearlycost" ng-model="calc.yearlycost" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Cost of follow up tasks per year  -->
+				<h1>We will cut the time you spend on follow up tasks by 50%</h1>
+				<!-- Average time spent on follow up tasks per week (in hours) using tillr  -->
+				<md-input-container>
+					<label>Average time spent on follow up tasks per week (in hours) using tillr</label>
+					<input name="tillrtime" ng-model="calc.tillrtime" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Average time spent on follow up tasks per week (in hours) using tillr  -->
+				<!-- Time saved (in hours) using tillr  -->
+				<md-input-container>
+					<label>Time saved (in hours) using tillr</label>
+					<input name="tillrtimesaved" ng-model="calc.tillrtimesaved" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Time saved (in hours) using tillr  -->
+				<!-- Cost of follow up tasks per year using tillr  -->
+				<md-input-container>
+					<label>Cost of follow up tasks per year using tillr</label>
+					<input name="tillrcost" ng-model="calc.tillrcost" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Cost of follow up tasks per year using tillr  -->
+				<!-- Money saved using tillr  -->
+				<md-input-container>
+					<label>Money saved using tillr</label>
+					<input name="tillrcostsaved" ng-model="calc.tillrcostsaved" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
+				</md-input-container>
+				<!-- /Money saved using tillr  -->
+			</ng-form>
+		</script>
+
+		<script type="text/javascript">
+			(function () {
+				
+				'use strict';
+				
+				var valueCalculator = {
+					controllerAs: 'calc',
+					controller: function () {
+						this.inspections = 5;
+						this.hours = 1;
+						this.time = this.inspections * this.hours;
+						this.salary = 40000;
+						this.weeklyrate = this.salary / 52;
+						this.hourlyrate = this.weeklyrate / 37.5;
+						this.weeklycost = this.time * this.hourlyrate;
+						this.yearlycost = this.weeklycost * 52;
+						
+						this.tillrtime = this.time / 2;
+						this.tillrtimesaved = this.time - this.tillrtime;
+						this.tillrcost = this.yearlycost / 2;
+						this.tillrcostsaved = this.yearlycost - this.tillrcost;
+						
+						this.update = function () {
+							this.time = this.inspections * this.hours
+							this.weeklyrate = this.salary / 52;
+							this.hourlyrate = this.weeklyrate / 37.5;
+							this.weeklycost = this.time * this.hourlyrate;
+							this.yearlycost = this.weeklycost * 52;
+							
+							this.tillrtime = this.time / 2;
+							this.tillrtimesaved = this.time - this.tillrtime;
+							this.tillrcost = this.yearlycost / 2;
+							this.tillrcostsaved = this.yearlycost - this.tillrcost;
+						}
+					},
+					templateUrl: 'calculator.html'	
+				};
+			
+				angular
+					.module('vc', ['ngMaterial', 'ng-currency'])
+					.config(function($mdThemingProvider){
+						$mdThemingProvider
+							.theme('default')
+							.primaryPalette('brown')
+							.accentPalette('red');
+					})
+					.component('valueCalculator', valueCalculator);
+					
+			})();
+		</script>
+
+	</body>
+</html>
