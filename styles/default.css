@@ -1,0 +1,55 @@
+body {
+    background-color: #eee;
+}
+
+label {
+    font-size: 1.2em;
+}
+
+.well label {
+    font-size: 1.4em;
+}
+
+.well .row {
+    margin-bottom: 20px;
+}
+
+.option {
+    margin-bottom: 30px;
+    border-left: solid 3px #ff7400;
+    padding-left: 10px;
+}
+
+.option input.input-sm {
+    padding: 6px 4px;
+    text-align: right;
+}
+
+.well input {
+    text-align: center;
+    font-size: 1.8em
+}
+
+rzslider .rz-pointer {
+    outline: 0;
+    background-color: #00a0a5;
+}
+
+rzslider .rz-bubble {
+    color: #ff7400;
+    font-weight: bold;
+}
+
+rzslider .rz-bubble.rz-limit {
+    color: #000;
+    font-weight: normal;
+}
+
+rzslider .rz-pointer.rz-active:after {
+    background-color: #ff7400;  
+}
+
+.well {
+    background-color: #ff7400; 
+    color: #fff;
+}
