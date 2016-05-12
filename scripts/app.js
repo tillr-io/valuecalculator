@@ -6,10 +6,16 @@
         controllerAs: 'calc',
         controller: function () {
             
-            this.inspections = 5;
+            this.edit = false;
+            this.updatePercent = function () {
+                console.log('clicked');
+                this.edit = !this.edit;
+            }
+            
+            /* B3 */ this.inspections = 0;
             this.inspectionsOptions = {
-                floor: 1,
-                ceil: 28,
+                floor: 0,
+                ceil: 10,
                 step: 1,
                 id: 'inspectionsSlider',
                 onEnd: () => {
@@ -17,10 +23,10 @@
                 }
             };
             
-            this.hours = 1;
+            /* B4 */ this.hours = 0;
             this.hoursOptions = {
-                floor: 1,
-                ceil: 21,
+                floor: 0,
+                ceil: 16,
                 step: 1,
                 id: 'hoursSlider',
                 onEnd: () => {
@@ -28,18 +34,10 @@
                 }
             };
             
-            this.time = this.inspections * this.hours;
-            this.timeOptions = {
-                floor: 1,
-                step: 1,
-                readOnly: true,
-                id: 'timeSlider'
-            };
-            
-            this.salary = 40000;
+            /* B5 */ this.salary = 0;
             this.salaryOptions = {
-                floor: 15000,
-                ceil: 90000,
+                floor: 0,
+                ceil: 70000,
                 step: 5000,
                 translate: function (value) {
                     return '£' + value;
@@ -50,70 +48,41 @@
                 }
             };
             
-            this.weeklyrate = this.salary / 52;
-            this.weeklyrateOptions = {
-                floor: 100,
-                step: 1,
-                translate: function (value) {
-                    return '£' + value;
-                },
-                id: 'weeklyrateSlider',
-                readOnly: true,
-                enforceStep: true
-            };
+            /* B7 */ this.chase = this.inspections * this.hours ;
+            /* B8 */ this.rate = this.salary / 2080;
+            /* B9 */ this.weekcost = this.chase * this.rate;
+            /* B10 */ this.yearcost = this.weekcost * 52;
             
-            this.hourlyrate = this.weeklyrate / 37.5;
-            this.hourlyrateOptions = {
-                floor: 8,
-                step: 1,
-                translate: function (value) {
-                    return '£' + value;
-                },
-                id: 'hourlyrateSlider',
-                readOnly: true,
-                enforceStep: true
-            };
+            this.percent = 40;
             
-            this.weeklycost = this.time * this.hourlyrate;
-            this.weeklycostOptions = {
-                floor: 50,
-                step: 1,
-                translate: function (value) {
-                    return '£' + value;
-                },
-                id: 'weeklycostSlider',
-                readOnly: true,
-                enforceStep: true
-            };
+            /* private */ this.percentage = this.percent / 100;
+            /* private */ this.tillrhours = this.chase * (1 - this.percentage);
             
-            this.yearlycost = this.weeklycost * 52;
-            this.yearlycostOptions = {
-                floor: 1000,
+            /* B17 */ this.team = 1;
+            this.teamOptions = {
+                floor: 1,
+                ceil: 60,
                 step: 1,
-                translate: function (value) {
-                    return '£' + value;
-                },
-                id: 'yearlycostSlider',
-                readOnly: true,
-                enforceStep: true
+                id: 'teamSlider',
+                onEnd: () => {
+                    this.update();
+                }
             };
-            
-            this.tillrtime = this.time / 2;
-            this.tillrtimesaved = this.time - this.tillrtime;
-            this.tillrcost = this.yearlycost / 2;
-            this.tillrcostsaved = this.yearlycost - this.tillrcost;
+
+            /* B13 */ this.hourssaved = ((this.chase - this.tillrhours).toFixed(0)) * this.team;
+            /* B14 */ this.moneysaved = (this.yearcost * this.percentage) * this.team;
             
             this.update = function () {
-                this.time = this.inspections * this.hours
-                this.weeklyrate = this.salary / 52;
-                this.hourlyrate = this.weeklyrate / 37.5;
-                this.weeklycost = this.time * this.hourlyrate;
-                this.yearlycost = this.weeklycost * 52;
+                /* B7 */ this.chase = this.inspections * this.hours;
+                /* B8 */ this.rate = this.salary / 2080;
+                /* B9 */ this.weekcost = this.chase * this.rate;
+                /* B10 */ this.yearcost = this.weekcost * 52;
                 
-                this.tillrtime = this.time / 2;
-                this.tillrtimesaved = this.time - this.tillrtime;
-                this.tillrcost = this.yearlycost / 2;
-                this.tillrcostsaved = this.yearlycost - this.tillrcost;
+                /* private */ this.percentage = this.percent / 100;
+                /* private */ this.tillrhours = this.chase * (1 - this.percentage);
+                
+                /* B13 */ this.hourssaved = ((this.chase - this.tillrhours).toFixed(0)) * this.team;
+                /* B14 */ this.moneysaved = (this.yearcost * this.percentage) * this.team;
             }
             
         },

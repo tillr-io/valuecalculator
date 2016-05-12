@@ -6,6 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="stylesheet" href="./styles/vendor/bootstrap.min.css" />
 		<link rel="stylesheet" href="./styles/vendor/rzslider.css" />
 		<link rel="stylesheet" href="./styles/default.css" />
@@ -20,25 +21,24 @@
 	</head>
 	<body ng-app="vc" ng-cloak>
 		
-		<div class="container">
-			
-			<div class="jumbotron">
-				
+		<header>
+			<div class="container">
 				<div class="row">
-					<div class="col-xs-2">
-						<div class="centered">
-							<img src="./images/logo.png" class="img-responsive" />
-						</div>
+					<div class="logo">
+						<img src="./images/logo.png" />
 					</div>
-					<div class="col-xs-10">
-						<div class="page-header">
-							<h1>tillr Value Calculator</h1>
-							<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean hendrerit leo vel odio facilisis ultricies. Pellentesque auctor. </h3>
-						</div>
+					<div class="title">
+						<h1>Value Calculator</h1>
+						<h2>Calculate the time and money you can save with tillr.</h2>
 					</div>
 				</div>
-			
+				<div class="row">
+					<h1>Value Calculator</h1>
+				</div>
 			</div>
+		</header>
+			
+		<div class="container">
 			
 			<div class="row">
 				<div class="col-xs-12">
@@ -56,214 +56,210 @@
 		<script type="text/ng-template" id="calculator.html">
 			<ng-form name="calculator">
 
-				<!-- Number of inspections per week -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="inspections">Number of inspections per week</label>
+				<div class="row">
+					
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						
+						<div class="well" id="questions">
+						
+							<!-- How many inspections do you perform per week? -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="inspections">How many inspections do you perform per week?</label>
+									</div>
+									<div class="col-xs-9">
+										<rzslider rz-slider-model="calc.inspections" rz-slider-options="calc.inspectionsOptions"></rzslider>
+									</div>
+									<div class="col-xs-3">
+										<input id="inspections" class="form-control" type="text" name="inspections" ng-model="calc.inspections" ng-change="calc.update()">
+									</div>
+								</div>
+							</div>
+							<!-- /How many inspections do you perform per week? -->
+							
+							<!-- How many hours of admin and chasing up does each inspection create for you? -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="hours">How many hours of admin and chasing up does each inspection create for you?</label>
+									</div>
+									<div class="col-xs-9">
+										<rzslider rz-slider-model="calc.hours" rz-slider-options="calc.hoursOptions"></rzslider>
+									</div>
+									<div class="col-xs-3">
+										<input id="hours" class="form-control" type="text" name="hours" ng-model="calc.hours" ng-change="calc.update()">
+									</div>
+								</div>
+							</div>
+							<!-- /How many hours of admin and chasing up does each inspection create for you? -->
+							
+							<!-- What is the average salary of the people managing inspections? -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="salary">What is the average salary of the people managing inspections?</label>
+									</div>
+									<div class="col-xs-9">
+										<rzslider rz-slider-model="calc.salary" rz-slider-options="calc.salaryOptions"></rzslider>
+									</div>
+									<div class="col-xs-3">
+										<input id="salary" class="form-control" type="text" name="salary" ng-model="calc.salary" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
+									</div>
+								</div>
+							</div>
+							<!-- /What is the average salary of the people managing inspections? -->
+							
 						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.inspections" rz-slider-options="calc.inspectionsOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="inspections" class="form-control input-sm" type="text" name="inspections" ng-model="calc.inspections" ng-change="calc.update()">
-						</div>
+						
 					</div>
-				</div>
-				<!-- /Number of inspections per week -->
-				
-				<!-- Number of hours spent on follow up tasks per week (in hours) -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="hours">Number of hours spent on follow up tasks per week (in hours)</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.hours" rz-slider-options="calc.hoursOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="hours" class="form-control input-sm" type="text" name="hours" ng-model="calc.hours" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Number of hours spent on follow up tasks per week (in hours) -->
-				
-				<!-- Average time spent on follow up tasks per week (in hours) -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="time">Average time spent on follow up tasks per week (in hours)</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.time" rz-slider-options="calc.timeOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="time" class="form-control input-sm" type="text" readonly name="time" ng-model="calc.time" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Average time spent on follow up tasks per week (in hours) -->
-				
-				<!-- Average salary of the person carrying out the inspections -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="salary">Average salary of the person carrying out the inspections</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.salary" rz-slider-options="calc.salaryOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="salary" class="form-control input-sm" type="text" name="salary" ng-model="calc.salary" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Average salary of the person carrying out the inspections -->
-				
-				<!-- Average weekly rate of the person carrying out the inspections -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="weeklyrate">Average weekly rate of the person carrying out the inspections</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.weeklyrate" rz-slider-options="calc.weeklyrateOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="weeklyrate" class="form-control input-sm" type="text" readonly name="weeklyrate" ng-model="calc.weeklyrate" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Average weekly rate of the person carrying out the inspections -->
-				
-				<!-- Average hourly rate of the person carrying out the inspections -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="hourlyrate">Average hourly rate of the person carrying out the inspections</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.hourlyrate" rz-slider-options="calc.hourlyrateOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="hourlyrate" class="form-control input-sm" type="text" readonly name="hourlyrate" ng-model="calc.hourlyrate" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Average hourly rate of the person carrying out the inspections -->
-				
-				<!-- Cost of follow up tasks per week  -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="weeklycost">Cost of follow up tasks per week</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.weeklycost" rz-slider-options="calc.weeklycostOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="weeklycost" class="form-control input-sm" type="text" readonly name="weeklycost" ng-model="calc.weeklycost" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Cost of follow up tasks per week  -->
-				
-				<!-- Cost of follow up tasks per year  -->
-				<div class="option">
-					<div class="row">
-						<div class="col-xs-12 col-sm-4">
-							<label for="yearlycost">Cost of follow up tasks per year</label>
-						</div>
-						<div class="col-xs-11 col-sm-6">
-							<rzslider rz-slider-model="calc.yearlycost" rz-slider-options="calc.yearlycostOptions"></rzslider>
-						</div>
-						<div class="col-xs-2">
-							<input id="yearlycost" class="form-control input-sm" type="text" readonly name="yearlycost" ng-model="calc.yearlycost" ng-currency min="0" fraction="0" currency-symbol="£" ng-change="calc.update()">
-						</div>
-					</div>
-				</div>
-				<!-- /Cost of follow up tasks per year  -->
 
-				<h1>tillr will cut the time you spend on follow up tasks by 50%</h1>
-				
-				<div class="well">
-					
-					<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-4">
 						
-						<div class="col-xs-12 col-sm-5">
+						<div class="well" id="calculations">
 							
-							<!-- Average time spent on follow up tasks per week (in hours) using tillr  -->
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="tillrtime">Average time spent on follow up tasks per week (in hours) using tillr</label>
+							<!-- Number of hours you spend on admin and chasing up per week -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="chase">Number of hours you spend on admin and chasing up per week</label>
+									</div>
+									<div class="col-xs-6 col-xs-offset-3">
+										<input id="chase" class="form-control strong" type="text" readonly name="chase" ng-model="calc.chase" ng-change="calc.update()">
+									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<input id="tillrtime" class="form-control input-lg" type="text" readonly name="tillrtime" ng-model="calc.tillrtime" ng-change="calc.update()">
-								</div>
-							</div>
-							<!-- /Average time spent on follow up tasks per week (in hours) using tillr  -->
+							<!-- /Number of hours you spend on admin and chasing up per week -->
 							
-						</div>
-						
-						<div class="col-xs-12 col-sm-5 col-sm-offset-2">
+							<!-- Average hourly rate of a person managing inspections -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="rate">Average hourly rate of a person managing inspections</label>
+									</div>
+									<div class="col-xs-6 col-xs-offset-3">
+										<input id="rate" class="form-control" type="text" readonly name="rate" ng-model="calc.rate" ng-currency min="0" fraction="2" currency-symbol="£"  ng-change="calc.update()">
+									</div>
+								</div>
+							</div>
+							<!-- /Average hourly rate of a person managing inspections -->
 							
-							<!-- Time saved (in hours) using tillr  -->
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="tillrtimesaved">Time saved (in hours) using tillr<br />&nbsp;</label>
+							<!-- Current cost of managing your inspections per week -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="weekcost">Current cost of managing your inspections per week</label>
+									</div>
+									<div class="col-xs-6 col-xs-offset-3">
+										<input id="weekcost" class="form-control strong" type="text" readonly name="weekcost" ng-model="calc.weekcost" ng-currency min="0" fraction="2" currency-symbol="£"  ng-change="calc.update()">
+									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<input id="tillrtimesaved" class="form-control input-lg" type="text" readonly name="tillrtimesaved" ng-model="calc.tillrtimesaved" ng-change="calc.update()">
-								</div>
-							</div>
-							<!-- /Time saved (in hours) using tillr  -->
+							<!-- /Current cost of managing your inspections per week -->
 							
-						</div>
-					
-					</div>
-					
-					<div class="row">
-						
-						<div class="col-xs-12 col-sm-5">
-							
-							<!-- Cost of follow up tasks per year using tillr  -->
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="tillrcost">Cost of follow up tasks per year using tillr</label>
+							<!-- Current cost of managing your inspections per year -->
+							<div class="option">
+								<div class="row">
+									<div class="col-xs-12">
+										<label for="yearcost">Current cost of managing your inspections per year</label>
+									</div>
+									<div class="col-xs-6 col-xs-offset-3">
+										<input id="yearcost" class="form-control strong" type="text" readonly name="yearcost" ng-model="calc.yearcost" ng-currency min="0" fraction="0" currency-symbol="£"  ng-change="calc.update()">
+									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<input id="tillrcost" class="form-control input-lg" type="text" readonly name="tillrcost" ng-model="calc.tillrcost" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
-								</div>
-							</div>
-							<!-- /Cost of follow up tasks per year using tillr  -->
-							
-						</div>
-						
-						<div class="col-xs-12 col-sm-5 col-sm-offset-2">
-							
-							<!-- Money saved using tillr  -->
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="tillrcostsaved">Money saved using tillr</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<input id="tillrcostsaved" class="form-control input-lg" type="text" readonly name="tillrcostsaved" ng-model="calc.tillrcostsaved" ng-currency min="0" fraction="2" currency-symbol="£" ng-change="calc.update()">
-								</div>
-							</div>
-							<!-- /Money saved using tillr  -->
+							<!-- /Current cost of managing your inspections per year -->
 							
 						</div>
 						
 					</div>
+
+					<div class="col-xs-12 col-sm-12 col-md-4">
 						
+						<div class="well" id="result">
+							
+							<div>
+							
+								<h2 ng-if="!calc.edit" ng-click="calc.updatePercent()">tillr cuts the cost of managing your inspections by <span>{{calc.percent}}</span>%</h2>
+								
+								<div class="percent form-group" ng-if="calc.edit">
+									<div class="row">
+										<div class="col-xs-4">
+											<div class="input-group">
+												<div class="input-group-addon">%</div>
+												<input id="percent" name="percent" class="form-control" ng-model="calc.percent" ng-change="calc.update()">
+											</div>
+										</div>
+										<div class="col-xs-2">
+											<button class="btn btn-sm" type="button" ng-click="calc.updatePercent()">done</button>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Hours saved per week using tillr -->
+								<div class="option">
+									<div class="row">
+										<div class="col-xs-12">
+											<label for="hourssaved">Hours saved per week using tillr</label>
+										</div>
+										<div class="col-xs-6 col-xs-offset-3">
+											<input id="hourssaved" class="form-control input-lg" type="text" readonly name="hourssaved" ng-model="calc.hourssaved" ng-change="calc.update()">
+										</div>
+									</div>
+								</div>
+								<!-- /Hours saved per week using tillr -->
+								
+								<!-- Money saved per year using tillr -->
+								<div class="option">
+									<div class="row">
+										<div class="col-xs-12">
+											<label for="moneysaved">Money saved per year using tillr</label>
+										</div>
+										<div class="col-xs-6 col-xs-offset-3">
+											<input id="moneysaved" class="form-control input-lg" type="text" readonly name="moneysaved" ng-model="calc.moneysaved" ng-currency min="0" fraction="0" currency-symbol="£"  ng-change="calc.update()">
+										</div>
+									</div>
+								</div>
+								<!-- /Money saved per year using tillr -->
+							
+							</div>
+							
+							<div id="team">
+							
+								<!-- It's not just me managing inspections... -->
+								<div class="row">
+									<div class="col-xs-12">
+										<p><span>&#10077;</span> <a href="#" ng-click="calc.teams = !calc.teams">It's not just me managing inspections...</a> <span>&#10078;</span></p>
+									</div>
+								</div>
+								<!-- /It's not just me managing inspections... -->
+								
+								<div class="well" ng-if="calc.teams">
+								
+									<!-- Including you, how many people manage inspections in your team? -->
+									<div class="option">
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="team">Including you, how many people manage inspections in your team?</label>
+											</div>
+											<div class="col-xs-9">
+												<rzslider rz-slider-model="calc.team" rz-slider-options="calc.teamOptions"></rzslider>
+											</div>
+											<div class="col-xs-3">
+												<input id="team" class="form-control" type="text" name="team" ng-model="calc.team" ng-change="calc.update()">
+											</div>
+										</div>
+									</div>
+									<!-- /Including you, how many people manage inspections in your team? -->
+								
+								</div>
+							
+							</div>
+							
+						</div>
+						
+					</div>
+					
 				</div>
 				
 			</ng-form>

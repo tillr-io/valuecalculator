@@ -2,32 +2,270 @@ body {
     background-color: #eee;
 }
 
-label {
-    font-size: 1.2em;
+.container {
+    width: auto;
+}
+
+header {
+    background-color: #ddd;
+    margin: 0 0 30px 0;
+    padding: 30px 30px 36px 30px;
+    border-bottom: solid 1px #999;
+    overflow: auto;
+}
+
+header .logo {
+    float: left;
+    width: 200px;
+    margin-right: 30px;
+}
+
+header .logo img {
+    width: 100%;
+}
+
+header .title h1 {
+    color: #6D6F71;
+    font-size: 2.8em;
+    margin: 10px 0 4px 0;
+}
+
+header .title h2 {
+    color: #6D6F71;
+    font-size: 1.6em;
+    margin-top: 0;
+}
+
+@media (max-width: 1280px) {
+    header {
+        padding: 15px 15px 18px 15px;
+    }    
+    
+    header .logo {
+        width: 160px;
+        margin-right: 15px;
+    }
+
+    header .title h1 {
+        margin-top: 8px;
+        font-size: 2.2em;
+    }
+    
+    header .title h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 376px) {
+    header .row:last-child {
+        display: none;
+    }  
+}
+
+@media (max-width: 375px) {
+    header .logo {
+        margin: 0 auto;
+        float: none;
+    }  
+    
+    header .title {
+        display: none;
+    } 
+    
+    header h1 {
+        font-size: 2em;
+        color: #6D6F71;
+        margin: 10px 0 0 0;
+        text-align: center;
+    }  
+}
+
+@media (max-width: 520px) {
+    header .title h1 {
+        margin-top: 20px;        
+    }
+    header .title h2 {
+        display: none;        
+    }
+}
+
+@media (max-width: 445px) {
+    header .title h1 {
+        margin-top: 4px;        
+    }
+}
+
+.well {
+    min-height: 602px;
 }
 
 .well label {
     font-size: 1.4em;
 }
 
+.well input.strong {
+    color: red;
+}
+
 .well .row {
     margin-bottom: 20px;
 }
 
-.option {
+.well .option {
     margin-bottom: 30px;
-    border-left: solid 3px #ff7400;
-    padding-left: 10px;
 }
 
-.option input.input-sm {
-    padding: 6px 4px;
-    text-align: right;
-}
-
-.well input {
+.well .option input.form-control {
     text-align: center;
-    font-size: 1.8em
+    padding: 10px 4px;
+}
+
+#questions.well label {
+    display: block;
+    padding-left: 10px;
+    border-left: solid #ff7400 4px;
+    margin-bottom: 10px;
+}
+
+#questions.well .row {
+    margin-bottom: 80px;
+}
+
+#questions.well .option:last-child .row {
+    margin-bottom: 0;
+}
+
+#calculations.well {
+    background: rgba(0, 160, 165, 0.2); 
+}
+
+#calculations.well .row {
+    margin-bottom: 20px;
+}
+
+#calculations.well .option:last-child .row {
+    margin-bottom: 0;
+}
+
+#calculations.well label {
+    display: block;
+    padding-left: 10px;
+    border-left: solid #ff7400 4px;
+    text-align: left;
+}
+
+#calculations.well input {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+#calculations.well input[readonly] {
+    background-color: #fff;
+}
+
+#calculations.well input[readonly]:focus {
+    border-color: #dce4ec;
+}
+
+#result.well h2 {
+    margin: 0 0 26px 0;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    font-weight: bold;
+    font-size: 2.4em;
+    line-height: 1.1em;
+}
+#result.well {
+    background-color: #ff7400;
+}
+
+#result.well > div:first-child {
+    color: #fff;
+}
+
+#result.well > div:first-child label {
+    font-size: 2.2em;
+    line-height: 1.1em;
+    text-align: center;
+    color: black;
+    display: block;
+    width: 80%;
+    margin: 0 auto 16px auto;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+}
+
+#result.well > div:first-child .percent label {
+    text-shadow: none;
+    font-size: 1.2em;
+    font-weight: normal;
+    line-height: 1em;
+    margin: 0;
+    text-align: left;
+    margin-top: 12px;
+}
+
+#result.well > div:first-child .percent button {
+    background-color: black;
+    color: white;
+    border-color: block;   
+    margin-top: 4px; 
+}
+
+@media (max-width: 1280px) {
+    #result.well > div label {
+        font-size: 1.9em;
+    }  
+}
+
+#result.well input.input-lg {
+    border-color: #666;
+    font-weight: bold;
+    font-size: 2em;
+    color: green;
+    background-color: #ffff99;
+}
+
+#result.well input[readonly]:focus {
+    border-color: #666;
+}
+
+p {
+    color: #fff;
+}
+
+a,
+a:visited,
+a:active {
+    color: #fff;
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+p {
+    text-align: center;
+}
+
+p span {
+    font-size: 1.2em;
+}
+
+#result.well .well {
+    min-height: auto;
+    margin-bottom: 10px;
+    padding: 19px 19px 10px 19px;
+}
+
+#result.well .well .option {
+    margin-bottom: 0;
+}
+
+#result.well #team .row {
+    margin-bottom: 0;
 }
 
 rzslider .rz-pointer {
@@ -47,9 +285,4 @@ rzslider .rz-bubble.rz-limit {
 
 rzslider .rz-pointer.rz-active:after {
     background-color: #ff7400;  
-}
-
-.well {
-    background-color: #ff7400; 
-    color: #fff;
 }
