@@ -18,7 +18,7 @@
                 ceil: 10,
                 step: 1,
                 id: 'inspectionsSlider',
-                onEnd: () => {
+                onEnd: function () {
                     this.update();
                 }
             };
@@ -29,7 +29,7 @@
                 ceil: 16,
                 step: 1,
                 id: 'hoursSlider',
-                onEnd: () => {
+                onEnd: function () {
                     this.update();
                 }
             };
