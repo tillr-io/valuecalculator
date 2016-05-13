@@ -64,7 +64,7 @@
                 ceil: 60,
                 step: 1,
                 id: 'teamSlider',
-                onEnd: () => {
+                onEnd: function () {
                     this.update();
                 }
             };
