@@ -43,7 +43,7 @@
                     return '£' + value;
                 },
                 id: 'salarySlider',
-                onEnd: () => {
+                onEnd: function () {
                     this.update();
                 }
             };
