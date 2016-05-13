@@ -6,10 +6,11 @@
         controllerAs: 'calc',
         controller: function () {
             
+            var _this = this;
+            
             this.edit = false;
             this.updatePercent = function () {
-                console.log('clicked');
-                this.edit = !this.edit;
+                _this.edit = !this.edit;
             }
             
             /* B3 */ this.inspections = 0;
@@ -19,7 +20,7 @@
                 step: 1,
                 id: 'inspectionsSlider',
                 onEnd: function () {
-                    this.update();
+                    _this.update();
                 }
             };
             
@@ -30,7 +31,7 @@
                 step: 1,
                 id: 'hoursSlider',
                 onEnd: function () {
-                    this.update();
+                    _this.update();
                 }
             };
             
@@ -44,7 +45,7 @@
                 },
                 id: 'salarySlider',
                 onEnd: function () {
-                    this.update();
+                    _this.update();
                 }
             };
             
@@ -65,7 +66,7 @@
                 step: 1,
                 id: 'teamSlider',
                 onEnd: function () {
-                    this.update();
+                    _this.update();
                 }
             };
 
