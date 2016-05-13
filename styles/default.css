@@ -121,7 +121,7 @@ header .title h2 {
 }
 
 #calculations.well .option input.form-control {
-    padding: 12px 4px;
+    height: 48px;
 }
 
 #questions.well label {
