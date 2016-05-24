@@ -180,7 +180,7 @@
 							
 							<div>
 							
-								<h2 ng-if="!calc.edit" ng-click="calc.updatePercent()">tillr cuts the cost of managing your inspections by <span>{{calc.percent}}</span>%</h2>
+								<h2 ng-if="!calc.edit" ng-click="calc.updatePercent()">Customers tell us they cut costs by <span>{{calc.percent}}</span>% using tillr - for you that would mean...</h2>
 								
 								<div class="percent form-group" ng-if="calc.edit">
 									<div class="row">
@@ -200,7 +200,7 @@
 								<div class="option">
 									<div class="row">
 										<div class="col-xs-12">
-											<label for="hourssaved">Hours saved per week using tillr</label>
+											<label for="hourssaved">Hours saved per week</label>
 										</div>
 										<div class="col-xs-6 col-xs-offset-3">
 											<input id="hourssaved" class="form-control input-lg" type="text" readonly name="hourssaved" ng-model="calc.hourssaved" ng-change="calc.update()">
@@ -213,7 +213,7 @@
 								<div class="option">
 									<div class="row">
 										<div class="col-xs-12">
-											<label for="moneysaved">Money saved per year using tillr</label>
+											<label for="moneysaved">Money saved per year</label>
 										</div>
 										<div class="col-xs-6 col-xs-offset-3">
 											<input id="moneysaved" class="form-control input-lg" type="text" readonly name="moneysaved" ng-model="calc.moneysaved" ng-currency min="0" fraction="0" currency-symbol="£"  ng-change="calc.update()">
